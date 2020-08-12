@@ -7,24 +7,25 @@ namespace ConsecutiveChars
         {
             if (string.IsNullOrEmpty(value)) return string.Empty;
 
-            var res = string.Empty;
-            var localCounter = 1;
+            var res = value[0].ToString();
+            var counter = 1;
 
-            res += value[0];
             for(var i = 1; i < value.Length; i++)
             {
                 var current = value[i];
 
-                if(localCounter < amount && res[res.Length - 1] == current)
+                if(res[res.Length - 1] == current)
                 {
-                    res += current;
-                    localCounter++;
+                    if(counter < amount)
+                    {
+                        res += current;
+                        counter++;
+                    }
                 }
-                else if(res[res.Length - 1] != current)
+                else
                 {
-                    localCounter = 0;
                     res += current;
-                    localCounter++;
+                    counter = 1;
                 }
             }
 
